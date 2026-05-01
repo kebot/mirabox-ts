@@ -193,13 +193,6 @@ export interface AerospaceControlProps {
   keyOffset?: number
 }
 
-const FOCUS_DIRECTIONS = [
-  { label: '←', cmd: 'focus left' },
-  { label: '↓', cmd: 'focus down' },
-  { label: '↑', cmd: 'focus up' },
-  { label: '→', cmd: 'focus right' },
-] as const
-
 export function AerospaceControl({
   workspaces = ['1', '2', '3', '4', '5', 'Q', 'W', 'E', 'R', 'T'],
   keyOffset = 1,
@@ -221,15 +214,6 @@ export function AerospaceControl({
           workspace={ws}
           isActive={focused === ws}
         />
-      ))}
-
-      {/* Touch keys: aerospace focus direction */}
-      {FOCUS_DIRECTIONS.map(({ label, cmd }, i) => (
-        <TouchKey key={cmd} index={i + 1} onClick={() => aerospace(cmd)}>
-          <Rect x={0} y={0} width={176} height={112} fill="#0f172a" />
-          <Text text={label} fill="#64748b" fontSize={36}
-                width={176} height={112} align="center" verticalAlign="middle" />
-        </TouchKey>
       ))}
     </>
   )
