@@ -4,9 +4,11 @@
 //   Keys 1–10 →  Aerospace workspaces: 1 2 3 4 5 / q w e r t
 //   Key 11    →  Claude Code status (model / cost / context %)
 //   Key 12    →  Claude Code mode (click to cycle: default / acceptEdits / plan / auto)
+//   Key 13    →  Screen brightness display (click → full)
 //   TouchKey 1  →  Volume display / mute toggle
 //   TouchKey 2–4 →  Aerospace focus ← ↓ ↑ →
 //   Knob 1  →  Volume adjust (rotate) / mute (click)
+//   Knob 2  →  Screen brightness adjust (rotate) / full (click)
 //
 // Run:
 //   bun run demo
@@ -15,7 +17,7 @@
 import React from 'react'
 import { mountDevice } from 'react-mirabox'
 import { DeviceManager } from 'mirabox-client'
-import { VolumeControl, AerospaceControl, ClaudeStatusWidget, ClaudeModeWidget } from './src/index'
+import { VolumeControl, AerospaceControl, ClaudeStatusWidget, ClaudeModeWidget, ScreenBrightness } from './src/index'
 
 const [device] = await new DeviceManager().enumerate()
 if (!device) {
@@ -37,6 +39,9 @@ function App() {
 
       {/* Key 12: Claude Code mode switcher */}
       <ClaudeModeWidget index={12} />
+
+      {/* Key 13 + Knob 3: screen brightness */}
+      <ScreenBrightness keyIndex={13} knob={3} display={'all'} />
 
       {/* TouchKey 1 + Knob 1: volume display and control
           (AerospaceControl uses TouchKeys 1–4 for focus direction,
